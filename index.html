@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Happy Birthday Celebration 🎉</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1><i class="fas fa-birthday-cake"></i> Happy Birthday! <i class="fas fa-gift"></i></h1>
+            <p class="subtitle">Create a personalized birthday celebration</p>
+            
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="birthdayName"><i class="fas fa-user"></i> Birthday Person's Name:</label>
+                    <input type="text" id="birthdayName" class="name-input" placeholder="Enter name here..." value="Ayush">
+                </div>
+                
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> How to setup:</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Put your photos in <code>public/</code> folder as: <code>photo1.jpg</code>, <code>photo2.jpg</code>, etc.</li>
+                        <li><i class="fas fa-check-circle"></i> Put music file as: <code>music.mp3</code> in <code>public/</code> folder</li>
+                        <li><i class="fas fa-check-circle"></i> Currently found: <span id="photoCount">0</span> photos</li>
+                        <li><i class="fas fa-check-circle"></i> Currently found: <span id="musicCount">0</span> music files</li>
+                    </ul>
+                </div>
+                
+                <div class="upload-section">
+                    <h3><i class="fas fa-cloud-upload-alt"></i> Or Upload Now:</h3>
+                    <div class="upload-buttons">
+                        <label class="upload-btn">
+                            <i class="fas fa-images"></i> Upload Photos
+                            <input type="file" id="photoUpload" accept="image/*" multiple style="display: none;">
+                        </label>
+                        <label class="upload-btn">
+                            <i class="fas fa-music"></i> Upload Music
+                            <input type="file" id="musicUpload" accept="audio/*" style="display: none;">
+                        </label>
+                    </div>
+                    <div class="upload-status" id="uploadStatus">Ready to upload...</div>
+                </div>
+                
+                <button class="start-btn" id="startBtn">
+                    <i class="fas fa-play"></i> Start Celebration
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Celebration Screen -->
+    <div class="main-content" id="mainContent">
+        <!-- Music Player -->
+        <div class="music-player">
+            <div class="music-info">
+                <div class="song-title" id="currentSong">Happy Birthday Music</div>
+                <div class="controls">
+                    <button class="control-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
+                    <button class="control-btn play-btn" id="playBtn"><i class="fas fa-play" id="playIcon"></i></button>
+                    <button class="control-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="70">
+                    <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="main-header">
+            <div class="confetti"></div>
+            <h1 class="animated-title">Happy Birthday <span id="displayName">!</span></h1>
+            <div class="birthday-emoji">🎂🎉🎁🎈🥳</div>
+            <p class="tagline">Wishing you a day filled with happiness and joy!</p>
+        </header>
+
+        <!-- Memories Gallery -->
+        <section class="gallery-section">
+            <h2><i class="fas fa-images"></i> Beautiful Memories</h2>
+            <p class="section-subtitle">Cherish these wonderful moments</p>
+            
+            <div class="gallery-controls">
+                <button class="gallery-btn" id="prevPhoto"><i class="fas fa-chevron-left"></i></button>
+                <span id="photoCounter">1 / 6</span>
+                <button class="gallery-btn" id="nextPhoto"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="gallery-container">
+                <div class="gallery-track" id="galleryTrack">
+                    <!-- Photos will be loaded here dynamically -->
+                </div>
+            </div>
+            
+            <div class="photo-thumbnails" id="thumbnails">
+                <!-- Thumbnails will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Birthday Wishes -->
+        <section class="wishes-section">
+            <h2><i class="fas fa-heart"></i> Birthday Wishes</h2>
+            <div class="wishes-container">
+                <div class="wish-card">
+                    <i class="fas fa-star wish-icon"></i>
+                    <p>May your birthday be filled with sunshine, smiles, laughter, and love!</p>
+                </div>
+                <div class="wish-card">
+                    <i class="fas fa-cake wish-icon"></i>
+                    <p>Wishing you a day that's as sweet as cake and as bright as candles!</p>
+                </div>
+                <div class="wish-card">
+                    <i class="fas fa-gift wish-icon"></i>
+                    <p>Hope all your wishes come true today and always. Enjoy your special day!</p>
+                </div>
+                <div class="wish-card">
+                    <i class="fas fa-champagne-glasses wish-icon"></i>
+                    <p>Another year older, another year wiser, another year more amazing!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Timer -->
+        <section class="countdown-section">
+            <h2><i class="fas fa-clock"></i> Time to Celebrate!</h2>
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>Made with <i class="fas fa-heart heart-beat"></i> for <span id="footerName">You</span></p>
+            <p class="footer-note">This celebration website will run continuously with music and animations!</p>
+            <div class="social-icons">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fas fa-share-alt"></i>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <!-- Music will be loaded dynamically -->
+    </audio>
+
+    <!-- Scripts -->
+    <script src="/script.js"></script>
+</body>
+</html>
