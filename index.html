@@ -3,169 +3,862 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Happy Birthday Celebration 🎉</title>
+    <title>🎂 Happy Birthday! ✨</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* BEAUTIFUL COLOR THEME */
+        :root {
+            --gold: #FFD700;
+            --pink: #FF69B4;
+            --blue: #4169E1;
+            --purple: #9370DB;
+            --teal: #20B2AA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* FLOATING STARS BACKGROUND */
+        .stars-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        /* WELCOME SCREEN */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+        
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: floatIn 1s ease;
+        }
+        
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .welcome-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--gold), var(--pink), var(--teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 3s infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { filter: hue-rotate(0deg); text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            100% { filter: hue-rotate(360deg); text-shadow: 0 0 20px rgba(255, 105, 180, 0.7); }
+        }
+        
+        .welcome-text {
+            font-size: 1.2rem;
+            color: #bbbbff;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        /* INPUT SECTION */
+        .input-group {
+            margin: 30px 0;
+        }
+        
+        .input-label {
+            display: block;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .name-input {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.8rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            color: #333;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+        
+        .name-input:focus {
+            outline: none;
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* START BUTTON */
+        .start-btn {
+            background: linear-gradient(45deg, var(--pink), var(--purple));
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.8rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+            background: linear-gradient(45deg, var(--purple), var(--pink));
+        }
+        
+        /* MAIN CONTENT */
+        .main-content {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-content.show {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+        
+        /* HEADER */
+        .main-header {
+            text-align: center;
+            padding: 80px 20px 50px;
+            position: relative;
+        }
+        
+        .birthday-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--gold), var(--pink), var(--teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 3s infinite alternate;
+        }
+        
+        .birthday-name {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            color: #bbbbff;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        /* PHOTO GALLERY */
+        .gallery-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .photo-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .photo-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .photo-caption {
+            padding: 20px;
+            font-size: 1.3rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        /* WISHES SECTION */
+        .wishes-section {
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-top: 40px;
+        }
+        
+        .wishes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .wish-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .wish-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--teal);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .wish-icon {
+            font-size: 3rem;
+            color: var(--teal);
+            margin-bottom: 20px;
+        }
+        
+        .wish-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #e6e6ff;
+        }
+        
+        /* MUSIC PLAYER */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .music-title {
+            font-size: 1rem;
+            color: var(--gold);
+            min-width: 150px;
+        }
+        
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .music-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+        
+        .music-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .play-btn {
+            background: linear-gradient(45deg, var(--teal), #20B2AA);
+        }
+        
+        .volume-slider {
+            width: 100px;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-text {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .heart {
+            color: var(--pink);
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        .footer-note {
+            color: #bbbbff;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .welcome-title { font-size: 3rem; }
+            .birthday-title { font-size: 3.5rem; }
+            .birthday-name { font-size: 2.5rem; }
+            .section-title { font-size: 2.2rem; }
+            .photos-grid { grid-template-columns: 1fr; }
+            .music-player { bottom: 10px; right: 10px; left: 10px; justify-content: center; }
+            .welcome-card { padding: 30px 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            .welcome-title { font-size: 2.5rem; }
+            .birthday-title { font-size: 2.8rem; }
+            .birthday-name { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            .photo-img { height: 250px; }
+        }
+        
+        /* SPECIAL EFFECTS */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            animation: sparklePop 0.5s ease-out forwards;
+        }
+        
+        @keyframes sparklePop {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        /* LOADING */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 50px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+        }
+        
+        .loading.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--gold);
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <!-- Welcome Screen -->
+    <!-- FLOATING STARS BACKGROUND -->
+    <div class="stars-bg" id="starsBg"></div>
+    
+    <!-- WELCOME SCREEN -->
     <div class="welcome-screen" id="welcomeScreen">
-        <div class="welcome-content">
-            <h1><i class="fas fa-birthday-cake"></i> Happy Birthday! <i class="fas fa-gift"></i></h1>
-            <p class="subtitle">Create a personalized birthday celebration</p>
+        <div class="welcome-card">
+            <h1 class="welcome-title">🎂 Happy Birthday! ✨</h1>
+            <p class="welcome-text">
+                Let's create a beautiful birthday celebration together!
+            </p>
             
-            <div class="input-section">
-                <div class="input-group">
-                    <label for="birthdayName"><i class="fas fa-user"></i> Birthday Person's Name:</label>
-                    <input type="text" id="birthdayName" class="name-input" placeholder="Enter name here..." value="Ayush">
-                </div>
-                
-                <div class="instructions">
-                    <h3><i class="fas fa-info-circle"></i> How to setup:</h3>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Put your photos in <code>public/</code> folder as: <code>photo1.jpg</code>, <code>photo2.jpg</code>, etc.</li>
-                        <li><i class="fas fa-check-circle"></i> Put music file as: <code>music.mp3</code> in <code>public/</code> folder</li>
-                        <li><i class="fas fa-check-circle"></i> Currently found: <span id="photoCount">0</span> photos</li>
-                        <li><i class="fas fa-check-circle"></i> Currently found: <span id="musicCount">0</span> music files</li>
-                    </ul>
-                </div>
-                
-                <div class="upload-section">
-                    <h3><i class="fas fa-cloud-upload-alt"></i> Or Upload Now:</h3>
-                    <div class="upload-buttons">
-                        <label class="upload-btn">
-                            <i class="fas fa-images"></i> Upload Photos
-                            <input type="file" id="photoUpload" accept="image/*" multiple style="display: none;">
-                        </label>
-                        <label class="upload-btn">
-                            <i class="fas fa-music"></i> Upload Music
-                            <input type="file" id="musicUpload" accept="audio/*" style="display: none;">
-                        </label>
-                    </div>
-                    <div class="upload-status" id="uploadStatus">Ready to upload...</div>
-                </div>
-                
-                <button class="start-btn" id="startBtn">
-                    <i class="fas fa-play"></i> Start Celebration
-                </button>
+            <div class="input-group">
+                <label class="input-label">
+                    <i class="fas fa-user"></i> Enter the birthday person's name:
+                </label>
+                <input type="text" id="birthdayName" class="name-input" 
+                       placeholder="Type name here..." autocomplete="off">
+            </div>
+            
+            <button class="start-btn" id="startBtn">
+                <i class="fas fa-play-circle"></i> Start Celebration
+            </button>
+            
+            <div style="margin-top: 30px; color: #bbbbff; font-size: 0.9rem;">
+                <p><i class="fas fa-info-circle"></i> Make sure your photos are in the public folder</p>
             </div>
         </div>
     </div>
-
-    <!-- Main Celebration Screen -->
+    
+    <!-- LOADING SCREEN -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p style="color: var(--gold); font-size: 1.2rem;">Loading celebration...</p>
+    </div>
+    
+    <!-- MAIN CONTENT -->
     <div class="main-content" id="mainContent">
         <!-- Music Player -->
         <div class="music-player">
-            <div class="music-info">
-                <div class="song-title" id="currentSong">Happy Birthday Music</div>
-                <div class="controls">
-                    <button class="control-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
-                    <button class="control-btn play-btn" id="playBtn"><i class="fas fa-play" id="playIcon"></i></button>
-                    <button class="control-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
-                    <input type="range" id="volumeSlider" min="0" max="100" value="70">
-                    <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
-                </div>
+            <div class="music-title" id="musicTitle">🎵 Birthday Music</div>
+            <div class="music-controls">
+                <button class="music-btn play-btn" id="playBtn">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </button>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                <i class="fas fa-volume-up" style="color: var(--teal);"></i>
             </div>
         </div>
-
+        
         <!-- Header -->
         <header class="main-header">
-            <div class="confetti"></div>
-            <h1 class="animated-title">Happy Birthday <span id="displayName">!</span></h1>
-            <div class="birthday-emoji">🎂🎉🎁🎈🥳</div>
-            <p class="tagline">Wishing you a day filled with happiness and joy!</p>
+            <h1 class="birthday-title">Happy Birthday</h1>
+            <div class="birthday-name" id="displayName"></div>
+            <p class="tagline">Wishing you a day filled with happiness, laughter, and wonderful moments!</p>
+            <div style="font-size: 3rem; margin: 30px 0; animation: bounce 2s infinite;">
+                🎂 🎉 🎁 ✨ ⭐
+            </div>
         </header>
-
-        <!-- Memories Gallery -->
+        
+        <!-- Photo Gallery -->
         <section class="gallery-section">
-            <h2><i class="fas fa-images"></i> Beautiful Memories</h2>
-            <p class="section-subtitle">Cherish these wonderful moments</p>
-            
-            <div class="gallery-controls">
-                <button class="gallery-btn" id="prevPhoto"><i class="fas fa-chevron-left"></i></button>
-                <span id="photoCounter">1 / 6</span>
-                <button class="gallery-btn" id="nextPhoto"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            
-            <div class="gallery-container">
-                <div class="gallery-track" id="galleryTrack">
-                    <!-- Photos will be loaded here dynamically -->
-                </div>
-            </div>
-            
-            <div class="photo-thumbnails" id="thumbnails">
-                <!-- Thumbnails will be loaded here -->
+            <h2 class="section-title">
+                <i class="fas fa-camera"></i> Beautiful Memories
+            </h2>
+            <div class="photos-grid" id="photosGrid">
+                <!-- Photos will load here -->
             </div>
         </section>
-
+        
         <!-- Birthday Wishes -->
         <section class="wishes-section">
-            <h2><i class="fas fa-heart"></i> Birthday Wishes</h2>
+            <h2 class="section-title">
+                <i class="fas fa-star"></i> Birthday Wishes
+            </h2>
             <div class="wishes-container">
-                <div class="wish-card">
-                    <i class="fas fa-star wish-icon"></i>
-                    <p>May your birthday be filled with sunshine, smiles, laughter, and love!</p>
-                </div>
-                <div class="wish-card">
-                    <i class="fas fa-cake wish-icon"></i>
-                    <p>Wishing you a day that's as sweet as cake and as bright as candles!</p>
-                </div>
-                <div class="wish-card">
+                <div class="wish-box">
                     <i class="fas fa-gift wish-icon"></i>
-                    <p>Hope all your wishes come true today and always. Enjoy your special day!</p>
+                    <p class="wish-text">May your birthday be filled with joy and your year ahead with success!</p>
                 </div>
-                <div class="wish-card">
-                    <i class="fas fa-champagne-glasses wish-icon"></i>
-                    <p>Another year older, another year wiser, another year more amazing!</p>
+                <div class="wish-box">
+                    <i class="fas fa-cake wish-icon"></i>
+                    <p class="wish-text">Wishing you endless happiness and dreams that come true today and always!</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Countdown Timer -->
-        <section class="countdown-section">
-            <h2><i class="fas fa-clock"></i> Time to Celebrate!</h2>
-            <div class="countdown-container">
-                <div class="countdown-box">
-                    <div class="countdown-number" id="days">00</div>
-                    <div class="countdown-label">Days</div>
-                </div>
-                <div class="countdown-box">
-                    <div class="countdown-number" id="hours">00</div>
-                    <div class="countdown-label">Hours</div>
-                </div>
-                <div class="countdown-box">
-                    <div class="countdown-number" id="minutes">00</div>
-                    <div class="countdown-label">Minutes</div>
-                </div>
-                <div class="countdown-box">
-                    <div class="countdown-number" id="seconds">00</div>
-                    <div class="countdown-label">Seconds</div>
+                <div class="wish-box">
+                    <i class="fas fa-heart wish-icon"></i>
+                    <p class="wish-text">May every moment of your special day be as amazing as you are!</p>
                 </div>
             </div>
         </section>
-
+        
         <!-- Footer -->
-        <footer class="main-footer">
-            <p>Made with <i class="fas fa-heart heart-beat"></i> for <span id="footerName">You</span></p>
-            <p class="footer-note">This celebration website will run continuously with music and animations!</p>
-            <div class="social-icons">
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-whatsapp"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fas fa-share-alt"></i>
+        <footer class="footer">
+            <p class="footer-text">
+                Made with <span class="heart"><i class="fas fa-heart"></i></span> 
+                for <span id="footerName" style="color: var(--pink); font-weight: bold;"></span>
+            </p>
+            <p class="footer-note">
+                Hope you have the most wonderful birthday celebration! 🎉
+            </p>
+            <div style="margin-top: 30px; font-size: 2rem; color: var(--gold);">
+                <i class="fas fa-birthday-cake"></i>
+                <i class="fas fa-champagne-glasses"></i>
+                <i class="fas fa-music"></i>
+                <i class="fas fa-camera"></i>
+                <i class="fas fa-star"></i>
             </div>
         </footer>
     </div>
-
-    <!-- Audio Element -->
+    
+    <!-- Audio -->
     <audio id="backgroundMusic" loop>
-        <!-- Music will be loaded dynamically -->
+        <!-- Music will load from public folder -->
     </audio>
 
-    <!-- Scripts -->
-    <script src="/script.js"></script>
+    <script>
+        // CREATE FLOATING STARS
+        function createStars() {
+            const starsBg = document.getElementById('starsBg');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                
+                starsBg.appendChild(star);
+            }
+        }
+        
+        // CREATE SPARKLE EFFECT
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 500);
+        }
+        
+        // ELEMENTS
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const mainContent = document.getElementById('mainContent');
+        const loading = document.getElementById('loading');
+        const startBtn = document.getElementById('startBtn');
+        const birthdayNameInput = document.getElementById('birthdayName');
+        const displayName = document.getElementById('displayName');
+        const footerName = document.getElementById('footerName');
+        const photosGrid = document.getElementById('photosGrid');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const musicTitle = document.getElementById('musicTitle');
+        
+        // STATE
+        let isPlaying = false;
+        let photosLoaded = 0;
+        const totalPhotos = 5;
+        
+        // INITIALIZE
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            birthdayNameInput.focus();
+            setupEventListeners();
+            
+            // Add sparkle effect on click
+            document.addEventListener('click', function(e) {
+                createSparkle(e.clientX, e.clientY);
+            });
+        });
+        
+        // SETUP EVENT LISTENERS
+        function setupEventListeners() {
+            startBtn.addEventListener('click', startCelebration);
+            
+            birthdayNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') startCelebration();
+            });
+            
+            playBtn.addEventListener('click', toggleMusic);
+            volumeSlider.addEventListener('input', updateVolume);
+        }
+        
+        // START CELEBRATION
+        function startCelebration() {
+            const name = birthdayNameInput.value.trim();
+            
+            if (!name) {
+                alert("Please enter a name for the birthday person!");
+                birthdayNameInput.focus();
+                return;
+            }
+            
+            // Update name
+            displayName.textContent = name;
+            footerName.textContent = name;
+            
+            // Show loading
+            welcomeScreen.style.opacity = '0';
+            loading.classList.add('show');
+            
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                loadPhotos();
+                loadMusic();
+                
+                setTimeout(() => {
+                    loading.classList.remove('show');
+                    mainContent.classList.add('show');
+                    createConfetti();
+                }, 1500);
+            }, 300);
+        }
+        
+        // LOAD PHOTOS
+        function loadPhotos() {
+            photosGrid.innerHTML = '';
+            photosLoaded = 0;
+            
+            const photoTitles = [
+                "Special Moment",
+                "Happy Times", 
+                "Beautiful Memory",
+                "Fun Celebration",
+                "Wonderful Day"
+            ];
+            
+            for (let i = 1; i <= totalPhotos; i++) {
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card';
+                
+                const img = document.createElement('img');
+                img.className = 'photo-img';
+                img.alt = photoTitles[i-1];
+                img.loading = 'lazy';
+                
+                // Try multiple paths
+                img.src = `photo${i}.jpg`;
+                
+                const caption = document.createElement('div');
+                caption.className = 'photo-caption';
+                caption.textContent = photoTitles[i-1] || `Memory ${i}`;
+                
+                photoCard.appendChild(img);
+                photoCard.appendChild(caption);
+                photosGrid.appendChild(photoCard);
+                
+                img.onload = function() {
+                    photosLoaded++;
+                    console.log(`✓ Loaded photo${i}.jpg`);
+                    
+                    if (photosLoaded === totalPhotos) {
+                        console.log('✅ All photos loaded successfully!');
+                    }
+                };
+                
+                img.onerror = function() {
+                    console.log(`Trying alternative path for photo${i}.jpg`);
+                    img.src = `public/photo${i}.jpg`;
+                    
+                    img.onerror = function() {
+                        caption.textContent = 'Photo Loading...';
+                        caption.style.color = '#ff6b6b';
+                    };
+                };
+            }
+        }
+        
+        // LOAD MUSIC
+        function loadMusic() {
+            const musicPaths = [
+                'music.mp3',
+                'public/music.mp3',
+                'https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3'
+            ];
+            
+            let currentPathIndex = 0;
+            
+            function tryNextPath() {
+                if (currentPathIndex >= musicPaths.length) {
+                    console.log('❌ No music file found');
+                    musicTitle.textContent = 'Music not available';
+                    return;
+                }
+                
+                backgroundMusic.src = musicPaths[currentPathIndex];
+                
+                backgroundMusic.play().then(() => {
+                    isPlaying = true;
+                    playIcon.className = 'fas fa-pause';
+                    musicTitle.textContent = 'Birthday Music 🎵';
+                    console.log(`✅ Playing: ${musicPaths[currentPathIndex]}`);
+                    
+                    backgroundMusic.volume = volumeSlider.value / 100;
+                }).catch(error => {
+                    currentPathIndex++;
+                    setTimeout(tryNextPath, 500);
+                });
+            }
+            
+            tryNextPath();
+        }
+        
+        // TOGGLE MUSIC
+        function toggleMusic() {
+            if (!backgroundMusic.src) {
+                loadMusic();
+                return;
+            }
+            
+            if (isPlaying) {
+                backgroundMusic.pause();
+                playIcon.className = 'fas fa-play';
+            } else {
+                backgroundMusic.play().then(() => {
+                    playIcon.className = 'fas fa-pause';
+                }).catch(error => {
+                    loadMusic();
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+        
+        // UPDATE VOLUME
+        function updateVolume() {
+            if (backgroundMusic.src) {
+                backgroundMusic.volume = volumeSlider.value / 100;
+            }
+        }
+        
+        // CREATE CONFETTI
+        function createConfetti() {
+            const confettiCount = 200;
+            const colors = ['#FFD700', '#FF69B4', '#20B2AA', '#9370DB', '#4169E1'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: ${Math.random() * 15 + 5}px;
+                    height: ${Math.random() * 15 + 5}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    top: -20px;
+                    left: ${Math.random() * 100}%;
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    z-index: 9999;
+                    pointer-events: none;
+                    animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
+                `;
+                
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+            
+            // Add animation CSS
+            if (!document.getElementById('confetti-animation')) {
+                const style = document.createElement('style');
+                style.id = 'confetti-animation';
+                style.textContent = `
+                    @keyframes confettiFall {
+                        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        // AUTO-START MUSIC
+        document.addEventListener('click', function initMusic() {
+            if (!isPlaying && mainContent.classList.contains('show')) {
+                setTimeout(loadMusic, 1000);
+            }
+            document.removeEventListener('click', initMusic);
+        });
+    </script>
 </body>
 </html>
