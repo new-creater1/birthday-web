@@ -1,0 +1,645 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a237e 0%, #311b92 50%, #4a69bd 100%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Welcome Screen */
+.welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #0c2461, #1e3799);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease;
+}
+
+.welcome-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.welcome-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-content h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    color: #ffeb3b;
+    text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #bbbbff;
+    margin-bottom: 30px;
+}
+
+/* Input Section */
+.input-section {
+    margin-top: 30px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #ffeb3b;
+}
+
+.name-input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.name-input:focus {
+    outline: none;
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 235, 59, 0.5);
+}
+
+/* Instructions */
+.instructions {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+    text-align: left;
+}
+
+.instructions h3 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.instructions ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.instructions li {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.instructions code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* Upload Section */
+.upload-section {
+    margin: 25px 0;
+}
+
+.upload-section h3 {
+    color: #ff9800;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.upload-btn {
+    background: linear-gradient(45deg, #2196F3, #21CBF3);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.upload-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(33, 150, 243, 0.4);
+}
+
+.upload-status {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    min-height: 20px;
+}
+
+/* Start Button */
+.start-btn {
+    background: linear-gradient(45deg, #E91E63, #FF9800);
+    color: white;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.start-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(233, 30, 99, 0.5);
+}
+
+/* Main Content */
+.main-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s;
+}
+
+.main-content.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Music Player */
+.music-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 15px 25px;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.music-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.song-title {
+    font-size: 1rem;
+    color: #ffeb3b;
+    min-width: 150px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.play-btn {
+    background: linear-gradient(45deg, #4CAF50, #2E7D32);
+}
+
+#volumeSlider {
+    width: 80px;
+}
+
+.volume-icon {
+    color: #4CAF50;
+}
+
+/* Header */
+.main-header {
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="2" fill="%23ffeb3b"/><circle cx="30" cy="25" r="1.5" fill="%23E91E63"/><circle cx="50" cy="15" r="1" fill="%234CAF50"/><circle cx="70" cy="30" r="2" fill="%232196F3"/><circle cx="90" cy="20" r="1.5" fill="%23FF9800"/></svg>');
+    animation: confettiMove 20s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes confettiMove {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(100vh); }
+}
+
+.animated-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #ffeb3b, #ff9800, #E91E63, #2196F3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: colorShift 3s infinite alternate;
+}
+
+@keyframes colorShift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.birthday-emoji {
+    font-size: 3rem;
+    margin: 20px 0;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: #bbbbff;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Gallery Section */
+.gallery-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.gallery-section h2 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    color: #ffeb3b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.section-subtitle {
+    color: #bbbbff;
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+
+.gallery-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.gallery-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+}
+
+.gallery-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+#photoCounter {
+    font-size: 1.3rem;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.gallery-container {
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.gallery-track img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 20px;
+}
+
+.photo-thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.thumbnail:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.thumbnail.active {
+    opacity: 1;
+    border-color: #ffeb3b;
+    transform: scale(1.1);
+}
+
+/* Wishes Section */
+.wishes-section {
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.wishes-section h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ffeb3b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.wishes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wish-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wish-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffeb3b;
+}
+
+.wish-icon {
+    font-size: 3rem;
+    color: #ffeb3b;
+    margin-bottom: 20px;
+}
+
+.wish-card p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+/* Countdown Section */
+.countdown-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.countdown-section h2 {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    color: #ffeb3b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.countdown-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    min-width: 150px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.countdown-number {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffeb3b;
+    text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+    margin-bottom: 10px;
+}
+
+.countdown-label {
+    font-size: 1.3rem;
+    color: #bbbbff;
+}
+
+/* Footer */
+.main-footer {
+    padding: 40px 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-footer p {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.heart-beat {
+    color: #E91E63;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.footer-note {
+    color: #bbbbff;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    font-size: 2rem;
+}
+
+.social-icons i {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-icons i:hover {
+    color: #ffeb3b;
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .animated-title {
+        font-size: 3rem;
+    }
+    
+    .gallery-track img {
+        height: 400px;
+    }
+    
+    .countdown-box {
+        min-width: 120px;
+        padding: 20px;
+    }
+    
+    .countdown-number {
+        font-size: 3rem;
+    }
+    
+    .music-player {
+        position: static;
+        margin: 20px auto;
+        width: 90%;
+        border-radius: 20px;
+    }
+    
+    .music-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-content {
+        padding: 20px;
+    }
+    
+    .animated-title {
+        font-size: 2.5rem;
+    }
+    
+    .gallery-track img {
+        height: 300px;
+    }
+    
+    .countdown-box {
+        min-width: 100px;
+        padding: 15px;
+    }
+    
+    .countdown-number {
+        font-size: 2.5rem;
+    }
+    
+    .wishes-container {
+        grid-template-columns: 1fr;
+    }
+}
